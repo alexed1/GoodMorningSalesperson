@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>User</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>AutolaunchFlow</apexClass>
         <enabled>true</enabled>
@@ -56,22 +61,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>SalesTacticalPlan__c.Tactic_Einstein_Score__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>SalesTacticalPlan__c.Tactic_Opp_Value__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>SalesTacticalPlan__c.Tactic_Proximity_to_Renewal__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>SalesTacticalPlan__c.Tactic_Sector_Focus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -11,15 +11,15 @@
             <targetReference>Test_Flow_for_Tactical_Recommendation_Gen</targetReference>
         </connector>
         <inputParameters>
-            <name>salesTacticalPlanName</name>
-            <value>
-                <stringValue>tacPlan1</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
             <name>maxResults</name>
             <value>
                 <numberValue>5.0</numberValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>salesTacticalPlanName</name>
+            <value>
+                <stringValue>tacPlan1</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -36,7 +36,7 @@
         </inputParameters>
         <outputParameters>
             <assignToReference>returnedRecommendations</assignToReference>
-            <name>curRecs</name>
+            <name>output</name>
         </outputParameters>
     </actionCalls>
     <formulas>

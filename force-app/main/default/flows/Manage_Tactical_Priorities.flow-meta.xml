@@ -344,7 +344,7 @@
             <inputParameters>
                 <name>FullItemSetCSV</name>
                 <value>
-                    <stringValue>Opportunity Value, Einstein Score, Time Before Contract Expiration, Sector Priority</stringValue>
+                    <stringValue>Opportunity Value,Einstein Score,Time Before Contract Expiration,Sector Priority</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -382,7 +382,7 @@
             <targetReference>screenTeamOrUser</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>curTacticalOrdering</name>
         <dataType>String</dataType>

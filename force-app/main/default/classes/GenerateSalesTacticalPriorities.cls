@@ -19,6 +19,7 @@ public with sharing class GenerateSalesTacticalPriorities {
 
         switch on tacticName {
             when 'Einstein Score'  {
+                System.debug('entering Einstein Score');
                 if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Einstein Score')) {
                     System.debug('Einstein Score is a chosen tactic');
                     relevantOpportunities = [select name, Id from Opportunity WHERE Opportunity.Einstein_Score__c != null ORDER BY Opportunity.Einstein_Score__c DESC  LIMIT :maxResults];
@@ -38,7 +39,10 @@ public with sharing class GenerateSalesTacticalPriorities {
                 }
             }
             when 'Sector Focus'  {
-                if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Sector Focus')) {
+                System.debug('Sector Focus is a chosen tactic');
+                List<String> curTactics = curSalesTacticalPlan.Tactical_Ordering__c.split(',');
+                if (curTactics.contains('Sector Priority')) {
+                    System.debug('ordering contains Sector priority');
                     relevantOpportunities = [select name, Id from Opportunity where Sector__c = :curSalesTacticalPlan.Sector_Name__c LIMIT :maxResults];
                 }
 
