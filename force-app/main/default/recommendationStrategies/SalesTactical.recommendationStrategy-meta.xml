@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecommendationStrategy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextRecordType>User</contextRecordType>
+    <invocableAction>
+        <label>Generate from Sector Focus</label>
+        <name>Generate_from_Sector_Focus</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;tacPlan1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Sector Focus&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Generate from Opp Value</label>
+        <name>Generate_from_Opp_Value</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;tacPlan1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Opportunity Value&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Generate from Einstein Score</label>
+        <name>Generate_from_Einstein_Score</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;tacPlan1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Einstein Score&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Generate from Renewal Proximity</label>
+        <name>Generate_from_Renewal_Proximity</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;tacPlan1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Proximity to Renewal&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <label>SalesTactical</label>
+    <sort>
+        <childNode>Generate_from_Sector_Focus</childNode>
+        <childNode>Generate_from_Opp_Value</childNode>
+        <childNode>Generate_from_Einstein_Score</childNode>
+        <childNode>Generate_from_Renewal_Proximity</childNode>
+        <label>Sort By Priority</label>
+        <name>Sort_By_Priority</name>
+        <field>
+            <name>Tactical_Priority__c</name>
+            <nullsFirst>false</nullsFirst>
+            <order>Asc</order>
+        </field>
+    </sort>
+    <union>
+        <childNode>Sort_By_Priority</childNode>
+        <label>Output</label>
+        <name>Output_29e78549675c4dd6883926e0354ba201</name>
+    </union>
+</RecommendationStrategy>
