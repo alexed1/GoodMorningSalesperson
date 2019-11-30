@@ -3,11 +3,11 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "c/toastMessage": [
-                "toastMessage/toastMessage.js"
-            ],
             "c/displayNBARecommendationsFSC": [
                 "displayNBARecommendationsFSC/displayNBARecommendationsFSC.js"
+            ],
+            "c/toastMessage": [
+                "toastMessage/toastMessage.js"
             ]
         }
     },

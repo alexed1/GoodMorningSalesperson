@@ -284,6 +284,7 @@
             <choiceReferences>choiceTeam</choiceReferences>
             <choiceReferences>choiceIndividual</choiceReferences>
             <dataType>String</dataType>
+            <defaultSelectedChoiceReference>choiceTeam</defaultSelectedChoiceReference>
             <fieldText>Manage Which Priorities</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>false</isRequired>

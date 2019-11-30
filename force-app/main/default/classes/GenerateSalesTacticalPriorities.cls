@@ -13,7 +13,7 @@ public with sharing class GenerateSalesTacticalPriorities {
         //2) Find all opportunities where the criteria type’s value exceeds the threshold
         //3) Generate recommendations  (unless the value of the criteria is 0) and set the TacticalPriority
 
-        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c from SalesTacticalPlan__c where name = :salesTacticalPlanName];
+        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c,Minimum_Opportunity_Value__c	,Minimum_Score__c	 from SalesTacticalPlan__c where name = :salesTacticalPlanName];
         System.debug('returned tactical plan is: ' + curSalesTacticalPlan);
         List<Opportunity> relevantOpportunities;
 
@@ -67,9 +67,6 @@ public with sharing class GenerateSalesTacticalPriorities {
                 System.debug('generated recommendation: ' + rec);
                 recs.add(rec);
             }
-            
-        
-        
 
               //Create a Results object to hold the return values
         List<List<Recommendation>> response = new List<List<Recommendation>>();
