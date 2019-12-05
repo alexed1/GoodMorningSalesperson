@@ -7,66 +7,40 @@ public with sharing class GenerateSalesTacticalPriorities {
         Integer maxResults = requests[0].maxResults;
         String salesTacticalPlanName = requests[0].salesTacticalPlanName;
         String tacticName = requests[0].tacticName;
+        String planType = requests[0].planType;
+        List<Recommendation> recs = new List<Recommendation>(); 
         System.debug('entering Generate Sales TacticalPriorities');
         System.debug('cur values are: ' +tacticName + ' ' + maxResults + ' ' + userId);
         //1) read in the SalesPriorityPlan
         //2) Find all opportunities where the criteria type’s value exceeds the threshold
         //3) Generate recommendations  (unless the value of the criteria is 0) and set the TacticalPriority
 
-        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c,Minimum_Opportunity_Value__c	,Minimum_Score__c	 from SalesTacticalPlan__c where name = :salesTacticalPlanName];
+        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c, Plan_Type__c	 from SalesTacticalPlan__c where name = :salesTacticalPlanName];
         System.debug('returned tactical plan is: ' + curSalesTacticalPlan);
-        List<Opportunity> relevantOpportunities;
+        List<Opportunity> relevantOpportunities = new List<Opportunity>();
+        List<Policy__c> relevantPolicies = new List<Policy__c>();
 
-        switch on tacticName {
-            when 'Einstein Score'  {
-                System.debug('entering Einstein Score');
-                if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Einstein Score')) {
-                    System.debug('Einstein Score is a chosen tactic');
-                    relevantOpportunities = [select name, Id from Opportunity WHERE Opportunity.Einstein_Score__c != null ORDER BY Opportunity.Einstein_Score__c DESC  LIMIT :maxResults];
-                }
+        switch on planType {
+            when 'OpportunitySelling' {
+                relevantOpportunities = ProcessSalesTactics.Process(relevantOpportunities, tacticName, curSalesTacticalPlan, maxResults);
+                recs = ProcessSalesTactics.GenerateRecommendations(relevantOpportunities, tacticName,  curSalesTacticalPlan);
             }
-            when 'Opportunity Value'  {
-                if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Opportunity Value')) {
-                    System.debug('Opportunity is a chosen tactic');
-                    relevantOpportunities = [select name, Id from Opportunity WHERE Opportunity.Amount != null ORDER BY Opportunity.Amount DESC  LIMIT :maxResults];
-                }
-            }
-            when 'Proximity to Renewal'  {
-                if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Proximity to Renewal')) {
-                    System.debug('Proximity to Renewal is a chosen tactic');
-                    //query for opps with the shortest time to CloseDate, limited by the max requested
-                    relevantOpportunities = [select name, Id from Opportunity WHERE Opportunity.Days_To_Close__c != null ORDER BY Opportunity.Days_To_Close__c ASC NULLS LAST LIMIT :maxResults];
-                }
-            }
-            when 'Sector Focus'  {
-                System.debug('Sector Focus is a chosen tactic');
-                List<String> curTactics = curSalesTacticalPlan.Tactical_Ordering__c.split(',');
-                if (curTactics.contains('Sector Priority')) {
-                    System.debug('ordering contains Sector priority');
-                    relevantOpportunities = [select name, Id from Opportunity where Sector__c = :curSalesTacticalPlan.Sector_Name__c LIMIT :maxResults];
-                }
+            when 'InsurancePolicies' {
+                relevantPolicies = ProcessPolicyTactics.Process(relevantPolicies, tacticName, curSalesTacticalPlan, maxResults);
+                recs = ProcessPolicyTactics.GenerateRecommendations(relevantPolicies, tacticName,  curSalesTacticalPlan);
 
             }
             when else {
-                System.debug('unsupported value was passed in as tacticName');
-            }
+                System.debug('unsupported value was passed in as planType');
+                throw new InvocableActionException ('unsupported value was passed in as planType');
+                }
+            
         }
+        
         System.debug('relevantOpportunities are: ' + relevantOpportunities);
             
-        List<Recommendation> recs = new List<Recommendation>(); 
-        if (relevantOpportunities != null)
-            for (Opportunity curOpp:relevantOpportunities) {
-                Recommendation rec = new Recommendation(
-                    Name = curOpp.Name,
-                    Description = 'Work on the ' + curOpp.Name + ' opportunity.' ,
-                    //Pre-req: Create a screen flow with the name simpleFlow                        
-                    ActionReference = 'TacticalFollowup',
-                    AcceptanceLabel = 'Go',
-                    Tactical_Priority__c = getPriority(curSalesTacticalPlan.Tactical_Ordering__c, tacticName)
-                );
-                System.debug('generated recommendation: ' + rec);
-                recs.add(rec);
-            }
+        
+        
 
               //Create a Results object to hold the return values
         List<List<Recommendation>> response = new List<List<Recommendation>>();
@@ -91,8 +65,7 @@ public with sharing class GenerateSalesTacticalPriorities {
     }
 
 
-    public class InvocableActionException extends Exception {
-    }
+  
 
 
     public class Requests {
@@ -108,6 +81,10 @@ public with sharing class GenerateSalesTacticalPriorities {
 
         @InvocableVariable
         public Integer maxResults;
+
+        @InvocableVariable
+        public String planType;	
+
     }
 
     public class Results {
@@ -116,6 +93,9 @@ public with sharing class GenerateSalesTacticalPriorities {
         public List<List<Recommendation>> curRecs;
 
     }
+
+     public class InvocableActionException extends Exception {}
+
 
 }
 

@@ -152,7 +152,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>TeamSalesTacticalPlan</label>
+    <label>SalesTacticalPlan</label>
     <nameField>
         <label>SalesTacticalPlan Name</label>
         <type>Text</type>

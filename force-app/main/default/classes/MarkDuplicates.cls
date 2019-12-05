@@ -15,7 +15,7 @@ public with sharing class MarkDuplicates {
             for (Recommendation processedRec:processedRecs) {
                 if (currentRec.Name == processedRec.Name){
                     System.debug('currentRec and processedRec match on name: ' + currentRec.Name);
-                    currentRec.DuplicateText__c = 'true';
+                   
                 }
             }
             //put it in the processedRecs list

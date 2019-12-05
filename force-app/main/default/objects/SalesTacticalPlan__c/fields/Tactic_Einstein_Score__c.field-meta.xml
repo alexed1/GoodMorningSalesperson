@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Tactical_Ordering__c</fullName>
-    <defaultValue>&#39;&#39;</defaultValue>
+    <fullName>Tactic_Einstein_Score__c</fullName>
     <description>This is used to populate the dual list box in the management flow. It generally shouldn&#39;t be edited outside of that dual list box.</description>
     <externalId>false</externalId>
-    <label>Tactical_Ordering</label>
+    <label>Tactical_Einstein_Score</label>
     <length>200</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

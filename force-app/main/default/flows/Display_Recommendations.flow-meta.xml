@@ -11,15 +11,15 @@
             <targetReference>Show_Recommendations</targetReference>
         </connector>
         <inputParameters>
-            <name>input1_Value</name>
-            <value>
-                <stringValue>tacPlan1</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
             <name>contextRecordId</name>
             <value>
                 <elementReference>curUserId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>maxResults</name>
+            <value>
+                <numberValue>10.0</numberValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -29,15 +29,15 @@
             </value>
         </inputParameters>
         <inputParameters>
-            <name>strategyName</name>
+            <name>input1_Value</name>
             <value>
-                <stringValue>SalesTactical</stringValue>
+                <stringValue>insurance1</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
-            <name>maxResults</name>
+            <name>strategyName</name>
             <value>
-                <numberValue>10.0</numberValue>
+                <stringValue>AgentPolicyTacticalStrategy</stringValue>
             </value>
         </inputParameters>
         <outputParameters>
@@ -48,7 +48,7 @@
     <formulas>
         <name>curUserId</name>
         <dataType>String</dataType>
-        <expression>{!$User.Id}</expression>
+        <expression>{!recordId}</expression>
     </formulas>
     <formulas>
         <name>userFirstName</name>
@@ -70,17 +70,39 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_User_Name</name>
+        <label>Get User Name</label>
+        <locationX>144</locationX>
+        <locationY>205</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Sales_Recommendations</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>FirstName</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>Show_Recommendations</name>
         <label>Show Recommendations</label>
         <locationX>343</locationX>
-        <locationY>52</locationY>
+        <locationY>51</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
             <name>disp1</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Good morning, {!userFirstName}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Good morning, {!Get_User_Name.FirstName}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -102,7 +124,7 @@
             <inputParameters>
                 <name>strategyName</name>
                 <value>
-                    <stringValue>SalesTactical</stringValue>
+                    <stringValue>AgentPolicyTacticalStrategy</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -121,7 +143,7 @@
         <locationX>50</locationX>
         <locationY>50</locationY>
         <connector>
-            <targetReference>Get_Sales_Recommendations</targetReference>
+            <targetReference>Get_User_Name</targetReference>
         </connector>
     </start>
     <status>Active</status>

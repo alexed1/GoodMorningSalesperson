@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecommendationStrategy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextRecordType>User</contextRecordType>
+    <filter>
+        <childNode>Mark_Duplicates</childNode>
+        <label>Filter Out Duplicates</label>
+        <name>Filter_Out_Duplicates</name>
+        <expression>Duplicate__c != true</expression>
+    </filter>
+    <invocableAction>
+        <childNode>Sort_By_Priority</childNode>
+        <label>Mark Duplicates</label>
+        <name>Mark_Duplicates</name>
+        <action>MarkDuplicates</action>
+        <isGenerator>false</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Generate from Attained Age Expiry</label>
+        <name>Generate_from_Attained_Age_Expiry</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;insurance1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Policy Expiring Soon (Attained Age)&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;InsurancePolicies&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Generate from Conversion Expiry</label>
+        <name>Generate_from_Conversion_Expiry</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;insurance1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Conversion Option Expiring Soon&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;InsurancePolicies&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <label>drag bug</label>
+    <sort>
+        <childNode>Generate_from_Attained_Age_Expiry</childNode>
+        <childNode>Generate_from_Conversion_Expiry</childNode>
+        <label>Sort By Priority</label>
+        <name>Sort_By_Priority</name>
+        <field>
+            <name>Tactical_Priority__c</name>
+            <nullsFirst>false</nullsFirst>
+            <order>Asc</order>
+        </field>
+    </sort>
+    <union>
+        <childNode>Filter_Out_Duplicates</childNode>
+        <label>Output</label>
+        <name>Output_29e78549675c4dd6883926e0354ba201</name>
+    </union>
+</RecommendationStrategy>

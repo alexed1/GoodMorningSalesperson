@@ -7,7 +7,7 @@
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
-        <label>Opportunity Information</label>
+        <label>Contact Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -23,25 +23,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>CampaignId</field>
+                <field>Title</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Sector__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Days_To_Close__c</field>
+                <field>Department</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Einstein_Score__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Type</field>
+                <field>ReportsToId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -49,7 +39,45 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>IsPrivate</field>
+                <field>Birthdate</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Policies__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Phone</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>HomePhone</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MobilePhone</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OtherPhone</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Fax</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Email</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>AssistantName</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>AssistantPhone</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -58,33 +86,17 @@
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
-        <label>Other Information</label>
+        <label>Address Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Amount</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>ExpectedRevenue</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>CloseDate</field>
+                <field>MailingAddress</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>NextStep</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>StageName</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Probability</field>
+                <field>OtherAddress</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -135,8 +147,6 @@
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
         <layoutColumns/>
-        <layoutColumns/>
-        <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
     <quickActionList>
@@ -186,22 +196,20 @@
         </relatedContentItems>
         <relatedContentItems>
             <layoutItem>
-                <behavior>Readonly</behavior>
-                <field>OwnerId</field>
+                <component>runtime_sales_social:socialPanel</component>
             </layoutItem>
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>Product2</fields>
-        <fields>Quantity</fields>
-        <fields>UnitPrice</fields>
-        <fields>ServiceDate</fields>
-        <fields>Description</fields>
-        <relatedList>RelatedLineItemList</relatedList>
+        <fields>OPPORTUNITY.NAME</fields>
+        <fields>OPPORTUNITY.STAGE_NAME</fields>
+        <fields>OPPORTUNITY.AMOUNT</fields>
+        <fields>OPPORTUNITY.CLOSE_DATE</fields>
+        <relatedList>RelatedOpportunityList</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
+        <fields>TASK.WHAT_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>TASK.STATUS</fields>
@@ -211,7 +219,7 @@
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
+        <fields>TASK.WHAT_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
@@ -219,29 +227,37 @@
         <relatedList>RelatedHistoryList</relatedList>
     </relatedLists>
     <relatedLists>
+        <fields>CASES.CASE_NUMBER</fields>
+        <fields>CASES.SUBJECT</fields>
+        <fields>CASES.PRIORITY</fields>
+        <fields>CASES.CREATED_DATE</fields>
+        <fields>CASES.STATUS</fields>
+        <fields>OWNER_NAME</fields>
+        <relatedList>RelatedCaseList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>CAMPAIGN.NAME</fields>
+        <fields>CAMPAIGN.START_DATE</fields>
+        <fields>CAMPAIGN.CAMPAIGN_TYPE</fields>
+        <fields>CM.STATUS</fields>
+        <fields>CM.RESPONDED</fields>
+        <fields>CM.LAST_UPDATE</fields>
+        <relatedList>RelatedCampaignList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>ContactName</fields>
-        <fields>Role</fields>
-        <fields>ContactTitle</fields>
-        <fields>IsPrimary</fields>
-        <fields>ContactPhone</fields>
-        <fields>ContactEmail</fields>
-        <fields>ContactAccountName</fields>
-        <relatedList>RelatedContactRoleList</relatedList>
+        <fields>ACTIVITY.SUBJECT</fields>
+        <fields>EMAIL_STATUS.CREATED_DATE</fields>
+        <fields>EMAIL_STATUS.FIRST_OPEN_DATE</fields>
+        <fields>EMAIL_STATUS.TIMES_OPENED</fields>
+        <fields>EMAIL_STATUS.LAST_OPEN_DATE</fields>
+        <relatedList>RelatedEmailStatusList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>ACCOUNT.NAME</fields>
-        <fields>PARTNER.ROLE</fields>
-        <fields>PARTNER.PRIMARY</fields>
-        <relatedList>RelatedPartnerList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedCompetitorList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedOpportunityHistoryList</relatedList>
+        <fields>NAME</fields>
+        <relatedList>Policy__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <runAssignmentRulesDefault>false</runAssignmentRulesDefault>

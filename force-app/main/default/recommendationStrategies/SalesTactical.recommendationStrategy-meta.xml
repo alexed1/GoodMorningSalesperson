@@ -28,6 +28,10 @@
             <value>&#39;Sector Focus&#39;</value>
         </argument>
         <argument>
+            <name>planType</name>
+            <value>&#39;OpportunitySelling&#39;</value>
+        </argument>
+        <argument>
             <name>maxResults</name>
             <value>5</value>
         </argument>
@@ -49,6 +53,10 @@
         <argument>
             <name>tacticName</name>
             <value>&#39;Opportunity Value&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;OpportunitySelling&#39;</value>
         </argument>
         <argument>
             <name>maxResults</name>
@@ -74,6 +82,10 @@
             <value>&#39;Einstein Score&#39;</value>
         </argument>
         <argument>
+            <name>planType</name>
+            <value>&#39;OpportunitySelling&#39;</value>
+        </argument>
+        <argument>
             <name>maxResults</name>
             <value>5</value>
         </argument>
@@ -95,6 +107,10 @@
         <argument>
             <name>tacticName</name>
             <value>&#39;Proximity to Renewal&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;OpportunitySelling&#39;</value>
         </argument>
         <argument>
             <name>maxResults</name>

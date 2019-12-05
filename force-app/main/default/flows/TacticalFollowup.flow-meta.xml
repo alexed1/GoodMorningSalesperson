@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Navigate_to_Policy</name>
+        <label>Navigate to Policy</label>
+        <locationX>351</locationX>
+        <locationY>52</locationY>
+        <actionName>c:navigateToRecord</actionName>
+        <actionType>component</actionType>
+        <inputParameters>
+            <name>sObject</name>
+            <value>
+                <stringValue>Policy__c</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>contextRecordId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <interviewLabel>TacticalFollowup {!$Flow.CurrentDateTime}</interviewLabel>
     <label>TacticalFollowup</label>
     <processMetadataValues>
@@ -16,16 +36,19 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <screens>
-        <name>Tactical_Flow</name>
-        <label>Tactical Flow</label>
-        <locationX>184</locationX>
-        <locationY>50</locationY>
+        <name>console1</name>
+        <label>console1</label>
+        <locationX>170</locationX>
+        <locationY>48</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Navigate_to_Policy</targetReference>
+        </connector>
         <fields>
-            <name>dispTactical</name>
-            <fieldText>&lt;p&gt;tactical Flow activated&lt;/p&gt;</fieldText>
+            <name>contextRecorddisp</name>
+            <fieldText>&lt;p&gt;Context Record Id is: {!contextRecordId}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;ContextId is {!ContextId}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -35,10 +58,24 @@
         <locationX>50</locationX>
         <locationY>50</locationY>
         <connector>
-            <targetReference>Tactical_Flow</targetReference>
+            <targetReference>console1</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>ContextId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>contextRecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>opportunityId</name>
         <dataType>String</dataType>
