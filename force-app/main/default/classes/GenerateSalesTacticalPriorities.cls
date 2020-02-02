@@ -3,7 +3,7 @@ public with sharing class GenerateSalesTacticalPriorities {
 
     @InvocableMethod
     public static List<List<Recommendation>> Generate(List<Requests> requests) {
-        String userId = requests[0].userId;
+        String userId =  requests[0].userId;
         Integer maxResults = requests[0].maxResults;
         String salesTacticalPlanName = requests[0].salesTacticalPlanName;
         String tacticName = requests[0].tacticName;
@@ -19,16 +19,20 @@ public with sharing class GenerateSalesTacticalPriorities {
         System.debug('returned tactical plan is: ' + curSalesTacticalPlan);
         List<Opportunity> relevantOpportunities = new List<Opportunity>();
         List<Policy__c> relevantPolicies = new List<Policy__c>();
+        List<SObject> relevantRecords = new List<SObject>();
 
         switch on planType {
             when 'OpportunitySelling' {
-                relevantOpportunities = ProcessSalesTactics.Process(relevantOpportunities, tacticName, curSalesTacticalPlan, maxResults);
-                recs = ProcessSalesTactics.GenerateRecommendations(relevantOpportunities, tacticName,  curSalesTacticalPlan);
+                //relevantOpportunities = ProcessPolicyTactics.Process(relevantOpportunities, tacticName, curSalesTacticalPlan, maxResults);
+                //recs = ProcessPolicyTactics.GenerateRecommendations(relevantOpportunities, tacticName,  curSalesTacticalPlan);
             }
             when 'InsurancePolicies' {
-                relevantPolicies = ProcessPolicyTactics.Process(relevantPolicies, tacticName, curSalesTacticalPlan, maxResults);
+                relevantPolicies = ProcessPolicyTactics.Process(tacticName, curSalesTacticalPlan, maxResults);
                 recs = ProcessPolicyTactics.GenerateRecommendations(relevantPolicies, tacticName,  curSalesTacticalPlan);
-
+            }
+            when 'Service' {
+                relevantRecords = ProcessServiceTactics.Process(tacticName, curSalesTacticalPlan, maxResults);
+                recs = ProcessServiceTactics.GenerateRecommendations(relevantRecords, tacticName,  curSalesTacticalPlan);
             }
             when else {
                 System.debug('unsupported value was passed in as planType');

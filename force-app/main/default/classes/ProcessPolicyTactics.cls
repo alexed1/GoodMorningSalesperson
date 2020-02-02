@@ -1,17 +1,18 @@
 public with sharing class ProcessPolicyTactics {
     
-    public static List<Policy__c> Process (List<Policy__c> relevantPolicies, String tacticName, SalesTacticalPlan__c curSalesTacticalPlan, Integer maxResults) {
-    
+    public static List<Policy__c> Process ( String tacticName, SalesTacticalPlan__c curSalesTacticalPlan, Integer maxResults) {
+        List<SObject> relevantPolicies = new List<SObject>();
         switch on tacticName {
             when 'Policy Expiring Soon (Attained Age)'  {
                 System.debug('entering Term Policy Expiring Soon');
                 if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Policy Expiring Soon (Attained Age)')) {
                     System.debug('Policy Expiring Soon (Attained Age) is a chosen tactic');
-                    relevantPolicies = [select name, Id from Policy__c WHERE Policy__c.Days_To_AATC_Expiration__c < 100 ORDER BY Policy__c.Days_To_AATC_Expiration__c ASC  LIMIT :maxResults];
+                    relevantPolicies = [select name, Id from Policy__c WHERE Policy__c.Days_to_Conversion_Credit_Expiration__c < 100 ORDER BY Policy__c.Days_to_Conversion_Credit_Expiration__c ASC  LIMIT :maxResults];
                 }
             }
             when 'Conversion Option Expiring Soon'  {
                 if (curSalesTacticalPlan.Tactical_Ordering__c.split(',').contains('Conversion Option Expiring Soon')) {
+                    
                     System.debug('Conversion Option Expiring Soon is a chosen tactic');
                     relevantPolicies = [select name, Id from Policy__c WHERE Policy__c.Days_to_Conversion_Credit_Expiration__c	<100 AND Policy__c.Days_to_Conversion_Credit_Expiration__c >0 ORDER BY Policy__c.Days_to_Conversion_Credit_Expiration__c ASC  LIMIT :maxResults];
                 }

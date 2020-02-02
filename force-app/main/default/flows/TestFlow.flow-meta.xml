@@ -64,6 +64,9 @@
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
+        <connector>
+            <targetReference>Post_to_Chatter</targetReference>
+        </connector>
     </screens>
     <startElementReference>Post_to_Chatter</startElementReference>
     <status>Draft</status>

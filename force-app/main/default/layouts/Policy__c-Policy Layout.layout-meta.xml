@@ -10,14 +10,8 @@
                 <behavior>Required</behavior>
                 <field>Name</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Attained_Age_Term_Conversion_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Days_To_AATC_Expiration__c</field>
-            </layoutItems>
+         
+            
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Contact__c</field>
@@ -38,14 +32,8 @@
                 <behavior>Readonly</behavior>
                 <field>Days_to_Conversion_Credit_Expiration__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Original_Age_Term_Conversion_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Days_to_Original_Age_Term_Conversion__c</field>
-            </layoutItems>
+           
+           
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <actionCalls>
-        <name>Navigate_to_Policy</name>
-        <label>Navigate to Policy</label>
-        <locationX>351</locationX>
-        <locationY>52</locationY>
-        <actionName>c:navigateToRecord</actionName>
-        <actionType>component</actionType>
-        <inputParameters>
-            <name>sObject</name>
-            <value>
-                <stringValue>Policy__c</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>recordId</name>
-            <value>
-                <elementReference>contextRecordId</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
+     
     <interviewLabel>TacticalFollowup {!$Flow.CurrentDateTime}</interviewLabel>
     <label>TacticalFollowup</label>
     <processMetadataValues>
@@ -43,9 +24,7 @@
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Navigate_to_Policy</targetReference>
-        </connector>
+      
         <fields>
             <name>contextRecorddisp</name>
             <fieldText>&lt;p&gt;Context Record Id is: {!contextRecordId}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;ContextId is {!ContextId}&lt;/p&gt;</fieldText>

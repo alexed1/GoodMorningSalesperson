@@ -5,7 +5,7 @@
         <childNode>Mark_Duplicates</childNode>
         <label>Filter Out Duplicates</label>
         <name>Filter_Out_Duplicates</name>
-        <expression>Duplicate__c != true</expression>
+        <expression>DuplicateText__c != &#39;true&#39;</expression>
     </filter>
     <invocableAction>
         <childNode>Sort_By_Priority</childNode>
@@ -16,20 +16,20 @@
         <type>apex</type>
     </invocableAction>
     <invocableAction>
-        <label>Generate from Attained Age Expiry</label>
-        <name>Generate_from_Attained_Age_Expiry</name>
+        <label>GenerateServiceRecommendations</label>
+        <name>GenerateServiceRecommendations</name>
         <action>GenerateSalesTacticalPriorities</action>
         <argument>
             <name>salesTacticalPlanName</name>
-            <value>&#39;insurance1&#39;</value>
+            <value>&#39;Service1&#39;</value>
         </argument>
         <argument>
             <name>tacticName</name>
-            <value>&#39;Policy Expiring Soon (Attained Age)&#39;</value>
+            <value>&#39;Limited Offers&#39;</value>
         </argument>
         <argument>
             <name>planType</name>
-            <value>&#39;InsurancePolicies&#39;</value>
+            <value>&#39;Service&#39;</value>
         </argument>
         <argument>
             <name>maxResults</name>
@@ -42,37 +42,19 @@
         <isGenerator>true</isGenerator>
         <type>apex</type>
     </invocableAction>
-    <invocableAction>
-        <label>Generate from Conversion Expiry</label>
-        <name>Generate_from_Conversion_Expiry</name>
-        <action>GenerateSalesTacticalPriorities</action>
-        <argument>
-            <name>salesTacticalPlanName</name>
-            <value>&#39;insurance1&#39;</value>
-        </argument>
-        <argument>
-            <name>tacticName</name>
-            <value>&#39;Conversion Option Expiring Soon&#39;</value>
-        </argument>
-        <argument>
-            <name>planType</name>
-            <value>&#39;InsurancePolicies&#39;</value>
-        </argument>
-        <argument>
-            <name>maxResults</name>
-            <value>5</value>
-        </argument>
-        <argument>
-            <name>userId</name>
-            <value>$Record.Id</value>
-        </argument>
-        <isGenerator>true</isGenerator>
-        <type>apex</type>
-    </invocableAction>
-    <label>drag bug</label>
+    <label>ServiceTacticalStrategy</label>
+    <map>
+        <childNode>Filter_Out_Duplicates</childNode>
+        <label>Map Context</label>
+        <name>Map_Context</name>
+        <mapExpression>
+            <expression>ContextId__c</expression>
+            <name>contextRecordId</name>
+            <type>Text</type>
+        </mapExpression>
+    </map>
     <sort>
-        <childNode>Generate_from_Attained_Age_Expiry</childNode>
-        <childNode>Generate_from_Conversion_Expiry</childNode>
+        <childNode>GenerateServiceRecommendations</childNode>
         <label>Sort By Priority</label>
         <name>Sort_By_Priority</name>
         <field>
@@ -82,7 +64,7 @@
         </field>
     </sort>
     <union>
-        <childNode>Filter_Out_Duplicates</childNode>
+        <childNode>Map_Context</childNode>
         <label>Output</label>
         <name>Output_29e78549675c4dd6883926e0354ba201</name>
     </union>
