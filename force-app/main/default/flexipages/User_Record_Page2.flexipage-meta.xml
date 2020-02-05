@@ -151,7 +151,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>maxDisplayPropositions</name>
-                <value>1</value>
+                <value>4</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>shouldLaunchActionOnReject</name>
@@ -163,7 +163,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>showImage</name>
-                <value>true</value>
+                <value>false</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>showRejectAction</name>
@@ -182,6 +182,35 @@
                 <value>Next Best Action</value>
             </componentInstanceProperties>
             <componentName>runtime_communities_nba:builderNbaWidget</componentName>
+            <visibilityRule>
+                <criteria>
+                    <leftValue>{!Record.CompanyName}</leftValue>
+                    <operator>NE</operator>
+                    <rightValue>Foobartech</rightValue>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>flowArguments</name>
+                <value>[{&quot;label&quot;:&quot;recordId&quot;,&quot;dataType&quot;:&quot;String&quot;,&quot;supportsRecordId&quot;:true,&quot;value&quot;:&quot;{!Record.Id}&quot;}]</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>flowLayout</name>
+                <value>oneColumn</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>flowName</name>
+                <value>Display_Recommendations</value>
+            </componentInstanceProperties>
+            <componentName>flowruntime:interview</componentName>
+            <visibilityRule>
+                <criteria>
+                    <leftValue>{!$User.CompanyName}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Foobartech</rightValue>
+                </criteria>
+            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>

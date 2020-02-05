@@ -16,7 +16,7 @@
         <type>apex</type>
     </invocableAction>
     <invocableAction>
-        <label>GenerateServiceRecommendations</label>
+        <label>Limited Offers</label>
         <name>GenerateServiceRecommendations</name>
         <action>GenerateSalesTacticalPriorities</action>
         <argument>
@@ -42,6 +42,87 @@
         <isGenerator>true</isGenerator>
         <type>apex</type>
     </invocableAction>
+    <invocableAction>
+        <label>Case Followups</label>
+        <name>Generate_Case_Followups</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;Service1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Case Follow Up&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;Service&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Display Priority Messages</label>
+        <name>Display_Priority_Messages</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;Service1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Priority Messages&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;Service&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Renewal Risks</label>
+        <name>Renewal_Risks</name>
+        <action>GenerateSalesTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&#39;Service1&#39;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&#39;Einstein (Renewal Risks)&#39;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&#39;Service&#39;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>2</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
     <label>ServiceTacticalStrategy</label>
     <map>
         <childNode>Filter_Out_Duplicates</childNode>
@@ -55,6 +136,9 @@
     </map>
     <sort>
         <childNode>GenerateServiceRecommendations</childNode>
+        <childNode>Generate_Case_Followups</childNode>
+        <childNode>Display_Priority_Messages</childNode>
+        <childNode>Renewal_Risks</childNode>
         <label>Sort By Priority</label>
         <name>Sort_By_Priority</name>
         <field>

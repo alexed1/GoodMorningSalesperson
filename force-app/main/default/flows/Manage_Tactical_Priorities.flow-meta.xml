@@ -146,6 +146,9 @@
         <label>Update Ordering</label>
         <locationX>1399</locationX>
         <locationY>42</locationY>
+        <connector>
+            <targetReference>Update_Notice</targetReference>
+        </connector>
         <inputReference>Get_Team_Tactical_Plan</inputReference>
     </recordUpdates>
     <screens>
@@ -233,7 +236,7 @@
             <inputParameters>
                 <name>FullItemSetCSV</name>
                 <value>
-                    <stringValue>Limited Offers, Case Follow Up, Priority Messages, Einstein (Renewal Risks)</stringValue>
+                    <stringValue>Limited Offers,Case Follow Up,Priority Messages,Einstein (Renewal Risks)</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -260,6 +263,22 @@
                     </rightValue>
                 </conditions>
             </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Update_Notice</name>
+        <label>Update Notice</label>
+        <locationX>1552</locationX>
+        <locationY>50</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>updateMessage</name>
+            <fieldText>&lt;p&gt;Priorities Updated!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

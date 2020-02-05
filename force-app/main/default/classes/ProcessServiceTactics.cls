@@ -9,7 +9,7 @@ public with sharing class ProcessServiceTactics {
                 if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Limited Offers')) {
                     System.debug('Limited Offers is a chosen tactic');
                     //travel sector affected by an epidemic. highly disruptive. ask if we can help. HQ has authoized payment relief of 30 days
-                    relevantRecords = [select Name, Id from Account WHERE Account.Industry IN ('Transportation','Tourism') AND Account.Region__c = 'East Asia'  LIMIT :maxResults];
+                    relevantRecords = [select Name, Id,  FollowupFlowName__c from Account WHERE Account.Industry IN ('Transportation','Tourism') AND Account.Region__c = 'East Asia'  LIMIT :maxResults];
                     for(SObject curItem : relevantRecords){
                         curItem.put('Description','Travel sector affected by an epidemic. May be disruptive to this customer. HQ has authorized payment relief of 30 days');
                     }
@@ -32,14 +32,25 @@ public with sharing class ProcessServiceTactics {
                 if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Priority Messages')) {
                     
                     System.debug('Priority Messages is a chosen tactic');
-                   // relevantAccounts = [select name, Id from Policy__c WHERE Policy__c.Days_to_Conversion_Credit_Expiration__c	<100 AND Policy__c.Days_to_Conversion_Credit_Expiration__c >0 ORDER BY Policy__c.Days_to_Conversion_Credit_Expiration__c ASC  LIMIT :maxResults];
+                    relevantRecords = [select Body__c, Name,Id, FlowName__c from Message__c WHERE Status__c = 'Active' LIMIT :maxResults];
+                    System.debug('Relevant Records: ' + relevantRecords);
+                    for(SObject curItem : relevantRecords){
+                        //curItem.put('Name',curItem.get('Body__c'));
+                        curItem.put('Description__c',curItem.get('Body__c'));
+                        //curItem.put('ActionReference', curItem.get('FlowName__c'));
+                    }
                 }
             }
             when 'Einstein (Renewal Risks)'  {
                 if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Einstein (Renewal Risks)')) {
                     
                     System.debug('Einstein (Renewal Risks) is a chosen tactic');
-                   // relevantAccounts = [select name, Id from Policy__c WHERE Policy__c.Days_to_Conversion_Credit_Expiration__c	<100 AND Policy__c.Days_to_Conversion_Credit_Expiration__c >0 ORDER BY Policy__c.Days_to_Conversion_Credit_Expiration__c ASC  LIMIT :maxResults];
+                    relevantRecords = [select Name, Id, FollowupFlowName__c from Account WHERE Account.Einstein_Renewal_Risk__c > .8 AND Account.Days_Since_Last_Followup__c	> 30  LIMIT :maxResults];
+                    System.debug('Relevant Records: ' + relevantRecords);
+                    for(SObject curItem : relevantRecords){
+                        curItem.put('Description', 'Einstein thinks this Account has a high risk of failure to renew.');
+                        
+                    }
                 }
             }
             when else {
@@ -53,6 +64,8 @@ public with sharing class ProcessServiceTactics {
     public static List<Recommendation> GenerateRecommendations (List<SObject> relevantRecords, String tacticName, SalesTacticalPlan__c curTacticalPlan ) {
         List<Recommendation> recs = new List<Recommendation>(); 
         String curName;
+        String curDescription;
+        String curActionRef = 'TacticalFollowup';
 
         if (relevantRecords != null)
             for (SObject curItem : relevantRecords) {
@@ -62,11 +75,37 @@ public with sharing class ProcessServiceTactics {
                 else {
                     curName = (String)curItem.get('Subject');
                 }
+
+                if (curItem.getSObjectType().getDescribe().getName() == 'Account' ) {
+                    if ((String)curItem.get('FollowupFlowName__c') != null ) {
+                        curActionRef = (String)curItem.get('FollowupFlowName__c');
+                    }
+                    else {
+                        curActionRef = 'TacticalFollowup';
+                    }
+                }
+           
+
+                if (curItem.getSObjectType().getDescribe().getName() == 'Message__c' ) {
+                    curDescription = (String)curItem.get('Body__c');
+                    if ((String)curItem.get('FlowName__c') != null ) {
+                        curActionRef = (String)curItem.get('FlowName__c');
+                    }
+                    else {
+                        curActionRef = 'TacticalFollowup';
+                    }
+                }
+                else {
+                    curDescription = (String)curItem.get('Description');
+                }
+
+                
+
                 Recommendation rec = new Recommendation(
                     Name = curName,
-                    Description = 'Prioritize ' + curName + '. \n The reason is: ' + (String)curItem.get('Description') ,
+                    Description = 'Prioritize ' + curName + '. \n The reason is: ' + curDescription ,
                     //Pre-req: Create a screen flow with the name simpleFlow                        
-                    ActionReference = 'TacticalFollowup',
+                    ActionReference =  curActionRef,
                     AcceptanceLabel = 'Go',
                     Tactical_Priority__c = GenerateSalesTacticalPriorities.getPriority(curTacticalPlan.Tactical_Ordering__c, tacticName),
                     ContextRecordId__c = (String)curItem.Id,

@@ -38,13 +38,9 @@ public with sharing class GenerateSalesTacticalPriorities {
                 System.debug('unsupported value was passed in as planType');
                 throw new InvocableActionException ('unsupported value was passed in as planType');
                 }
-            
         }
         
         System.debug('relevantOpportunities are: ' + relevantOpportunities);
-            
-        
-        
 
               //Create a Results object to hold the return values
         List<List<Recommendation>> response = new List<List<Recommendation>>();

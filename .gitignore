@@ -6,6 +6,7 @@
 .sfdx/
 .localdevserver/
 force-app/main/default/profiles
+**mdapi
 
 # Logs
 logs
