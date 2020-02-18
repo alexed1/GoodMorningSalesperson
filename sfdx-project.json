@@ -6,6 +6,20 @@
             "package": "GoodMorningSalesperson",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
+        },
+        {
+            "path": "force-app",
+            "package": "GoodMorning",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
+        },
+        {
+            "path": "force-app",
+            "package": "GoodMorning2",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
@@ -13,6 +27,9 @@
     "sourceApiVersion": "47.0",
     "packageAliases": {
         "GoodMorningSalesperson": "0Ho6g000000PAz0CAG",
-        "GoodMorningSalesperson@0.1.0-1": "04t6g000002iPIYAA2"
+        "GoodMorningSalesperson@0.1.0-1": "04t6g000002iPIYAA2",
+        "GoodMorning": "0HoB0000000CazBKAS",
+        "GoodMorning2": "0HoB0000000CazGKAS",
+        "GoodMorning2@1.0.0-0": "04tB0000000OdZaIAK"
     }
 }
