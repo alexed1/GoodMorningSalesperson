@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Message__c",
+                "referenceId": "Message__cRef1"
+            },
+            "Body__c": "Click here to learn more",
+            "Name": "ESPP Registration Deadline Coming Up!"
+        }
+    ]
+}

@@ -9,7 +9,7 @@ public with sharing class ProcessServiceTactics {
                 if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Limited Offers')) {
                     System.debug('Limited Offers is a chosen tactic');
                     //travel sector affected by an epidemic. highly disruptive. ask if we can help. HQ has authoized payment relief of 30 days
-                    relevantRecords = [select Name, Id,  FollowupFlowName__c from Account WHERE Account.Industry IN ('Transportation','Tourism') AND Account.Region__c = 'East Asia'  LIMIT :maxResults];
+                    relevantRecords = [select Name, Id,  FollowupFlowName__c from Account WHERE Account.Industry IN ('Transportation','Tourism')   LIMIT :maxResults]; //AND Account.Region__c = 'East Asia'
                     for(SObject curItem : relevantRecords){
                         curItem.put('Description','Travel sector affected by an epidemic. May be disruptive to this customer. HQ has authorized payment relief of 30 days');
                     }

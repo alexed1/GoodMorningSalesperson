@@ -3,29 +3,17 @@
     <actionCalls>
         <name>Get_Sales_Recommendations</name>
         <label>Get Sales Recommendations</label>
-        <locationX>186</locationX>
-        <locationY>51</locationY>
+        <locationX>268</locationX>
+        <locationY>49</locationY>
         <actionName>ExecuteNBAStrategy</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Show_Recommendations</targetReference>
         </connector>
         <inputParameters>
-            <name>contextRecordId</name>
+            <name>input1_Value</name>
             <value>
-                <elementReference>curUserId</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>input1_Name</name>
-            <value>
-                <stringValue>salesTacticalPlanName</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>strategyName</name>
-            <value>
-                <stringValue>ServiceTacticalStrategy</stringValue>
+                <stringValue>Service1</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -35,9 +23,21 @@
             </value>
         </inputParameters>
         <inputParameters>
-            <name>input1_Value</name>
+            <name>strategyName</name>
             <value>
-                <stringValue>Service1</stringValue>
+                <stringValue>ServiceTacticalStrategy</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>input1_Name</name>
+            <value>
+                <stringValue>salesTacticalPlanName</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>contextRecordId</name>
+            <value>
+                <elementReference>curUserId</elementReference>
             </value>
         </inputParameters>
         <outputParameters>
@@ -73,8 +73,8 @@
     <recordLookups>
         <name>Get_User_Name</name>
         <label>Get User Name</label>
-        <locationX>144</locationX>
-        <locationY>205</locationY>
+        <locationX>150</locationX>
+        <locationY>50</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Sales_Recommendations</targetReference>
@@ -95,8 +95,8 @@
     <screens>
         <name>Show_Recommendations</name>
         <label>Show Recommendations</label>
-        <locationX>343</locationX>
-        <locationY>51</locationY>
+        <locationX>392</locationX>
+        <locationY>49</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -146,7 +146,7 @@
             <targetReference>Get_User_Name</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>curRecommendations</name>
         <apexClass>NBARecommendationsList</apexClass>
